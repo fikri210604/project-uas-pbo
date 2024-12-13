@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="900.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectakhir.MenuController">
+   <children>
+      <ImageView fx:id="pane" fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/MenuBackground.jpeg" />
+         </image>
+      </ImageView>
+      <Button fx:id="newGameButton" layoutX="411.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleNewGameAction" prefHeight="26.0" prefWidth="78.0" text="New Game" />
+      <Button fx:id="loadGameButton" layoutX="412.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleLoadGameAction" text="Load Game" />
+      <Button fx:id="aboutButton" layoutX="411.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleAboutAction" prefHeight="26.0" prefWidth="77.0" text="About" />
+      <Button fx:id="exitButton" layoutX="411.0" layoutY="412.0" mnemonicParsing="false" onAction="#handleExitAction" prefHeight="26.0" prefWidth="77.0" text="Exit" />
+      <ImageView fitHeight="246.0" fitWidth="444.0" layoutX="232.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/Title.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
