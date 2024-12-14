@@ -176,18 +176,6 @@ public class SpaceExplorerGameController implements Initializable {
             }
         }
 
-        // Mengganti Lawan menjadi Opponent 3 jika point sudah mencapat 1000 
-        if (score >= 1000 && !(opponents.get(3) instanceof Opponent3)) {
-            for (Opponent opponent : opponents) {
-                gameCanvas.getChildren().remove(opponent.getView());
-            }
-            opponents.clear();
-            for (int i = 0; i < 15; i++) { // Musuh menjadi 15 ketika sudah sampai 500 poinnya
-                Opponent3 newOpponent = new Opponent3(RAND.nextInt(WIDTH - 40), -RAND.nextInt(200));
-                opponents.add(newOpponent);
-                gameCanvas.getChildren().add(newOpponent.getView());
-            }
-        }
 
         // Menghilangkan peluru yang sudah ditembak
         player.getBullets().removeAll(bulletsToRemove);
@@ -359,8 +347,7 @@ public class SpaceExplorerGameController implements Initializable {
 
         //Mengganti gambar 
         Opponent2(double x, double y) {
-            super(x, y, new Image(SpaceExplorerGameController.class.getResource(
-                    "/projectakhir/image/images/2.png").toExternalForm()));
+            super(x, y, new Image(SpaceExplorerGameController.class.getResource("/projectakhir/image/images/2.png").toExternalForm()));
             this.speed = 20;
         }
 
@@ -375,28 +362,6 @@ public class SpaceExplorerGameController implements Initializable {
         }
     }
 
-    // Kelas Opponent3 yang mewarisi kelas Opponent dan Melakukan Polymorphism terhadap kelas Opponent
-    public class Opponent3 extends Opponent {
-
-        private int speed;
-
-        //Mengganti gambar 
-        Opponent3(double x, double y) {
-            super(x, y, new Image(SpaceExplorerGameController.class.getResource(
-                    "/projectakhir/image/images/3.png").toExternalForm()));
-            this.speed = 30;
-        }
-
-        @Override
-        public void moveDown() {
-            move(0, speed);
-        }
-
-        @Override
-        public void increaseSpeed(double increaseSpeed) {
-            this.speed += increaseSpeed;
-        }
-    }
 
     // Handler tombol
     @FXML
