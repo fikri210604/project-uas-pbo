@@ -95,14 +95,14 @@ public class SpaceExplorerGameController implements Initializable {
         gameCanvas.requestFocus();
         // Buat pemain (player)
         player = new Rocket(WIDTH / 2, HEIGHT - 80, PLAYER_IMG);
-        player.getView().setId("player"); 
+        player.getView().setId("player");
         gameCanvas.getChildren().add(player.getView());
 
         // Buat musuh awal
         opponents = new ArrayList<>();
         for (int i = 0; i < 10; i++) { // Buat 10 musuh awal
             Opponent1 opponent = new Opponent1(RAND.nextDouble() * (WIDTH - 40), -RAND.nextDouble() * 200);
-            opponent.getView().setId("opponent_" + i); // Set ID unik untuk musuh
+            opponent.getView().setId("opponent_" + i); 
             opponents.add(opponent);
             gameCanvas.getChildren().add(opponent.getView());
         }
@@ -124,11 +124,11 @@ public class SpaceExplorerGameController implements Initializable {
             rocketPlayer.setVisible(false);
             player.getView().setVisible(false);
             for (Opponent opponent : opponents) {
-                opponent.getView().setVisible(false); // Menyembunyikan setiap musuh
+                opponent.getView().setVisible(false); 
             }
 
             for (Bullet bullet : player.getBullets()) {
-                bullet.getBulletView().setVisible(false); // Menyembunyikan gambar peluru
+                bullet.getBulletView().setVisible(false); 
             }
             scoreLabel.setText("Score: " + score);
             gameLoop.stop();
@@ -159,11 +159,11 @@ public class SpaceExplorerGameController implements Initializable {
                     bulletsToRemove.add(bullet);
                     opponentsToRemove.add(opponent);
                     score += 10; // Tambahkan skor saat musuh tertembak
-                    scoreLabel.setText("Score: " + score); 
+                    scoreLabel.setText("Score: " + score);
                 }
             }
         }
-        // Mengganti Lawan jika point sudah mencapat 500 
+        // Mengganti Lawan menjadi Opponent 2 jika point sudah mencapat 500 
         if (score >= 500 && !(opponents.get(3) instanceof Opponent2)) {
             for (Opponent opponent : opponents) {
                 gameCanvas.getChildren().remove(opponent.getView());
@@ -175,6 +175,20 @@ public class SpaceExplorerGameController implements Initializable {
                 gameCanvas.getChildren().add(newOpponent.getView());
             }
         }
+
+        // Mengganti Lawan menjadi Opponent 3 jika point sudah mencapat 1000 
+        if (score >= 1000 && !(opponents.get(3) instanceof Opponent3)) {
+            for (Opponent opponent : opponents) {
+                gameCanvas.getChildren().remove(opponent.getView());
+            }
+            opponents.clear();
+            for (int i = 0; i < 15; i++) { // Musuh menjadi 15 ketika sudah sampai 500 poinnya
+                Opponent3 newOpponent = new Opponent3(RAND.nextInt(WIDTH - 40), -RAND.nextInt(200));
+                opponents.add(newOpponent);
+                gameCanvas.getChildren().add(newOpponent.getView());
+            }
+        }
+
         // Menghilangkan peluru yang sudah ditembak
         player.getBullets().removeAll(bulletsToRemove);
         opponents.removeAll(opponentsToRemove);
@@ -226,12 +240,13 @@ public class SpaceExplorerGameController implements Initializable {
             view.setLayoutY(y);
         }
     }
+
     // Kelas Rocket mewarisi kelas Character
     public class Rocket extends Character {
 
         private List<Bullet> bullets;
         private long lastShotTime;
-        private static final long SHOOT_COOLDOWN = 100; 
+        private static final long SHOOT_COOLDOWN = 100;
 
         Rocket(double x, double y, Image image) {
             super(x, y, image);
@@ -251,7 +266,7 @@ public class SpaceExplorerGameController implements Initializable {
                 Bullet bullet = new Bullet(x + 20, y);
                 bullets.add(bullet);
                 gameCanvas.getChildren().add(bullet.getBulletView());
-                lastShotTime = currentTime; 
+                lastShotTime = currentTime;
                 SpaceExplorerGameController.this.score += 10;
                 SpaceExplorerGameController.this.scoreLabel.setText("Score: " + SpaceExplorerGameController.this.score);
             }
@@ -260,15 +275,15 @@ public class SpaceExplorerGameController implements Initializable {
         public void updateBullets() {
             List<Bullet> bulletsToRemove = new ArrayList<>();
             for (Bullet bullet : bullets) {
-                bullet.moveUp(); 
+                bullet.moveUp();
                 if (bullet.getBulletView().getLayoutY() < 0) {
                     bulletsToRemove.add(bullet);
                 }
             }
             for (Bullet bullet : bulletsToRemove) {
-                gameCanvas.getChildren().remove(bullet.getBulletView()); 
+                gameCanvas.getChildren().remove(bullet.getBulletView());
             }
-            bullets.removeAll(bulletsToRemove); 
+            bullets.removeAll(bulletsToRemove);
         }
     }
 
@@ -293,7 +308,7 @@ public class SpaceExplorerGameController implements Initializable {
             bulletView.setLayoutY(bulletView.getLayoutY() - 10);
         }
     }
-    
+
     // Kelas Opponent yang mewarisi kelas Character
     public class Opponent extends Character {
 
@@ -313,7 +328,7 @@ public class SpaceExplorerGameController implements Initializable {
         public void increaseSpeed(double increaseSpeed) {
         }
     }
-    
+
     // Kelas Opponent1 yang mewarisi kelas Opponent dan Melakukan Polymorphism terhadap kelas Opponent
     public class Opponent1 extends Opponent {
 
@@ -336,11 +351,12 @@ public class SpaceExplorerGameController implements Initializable {
             this.speed += increaseSpeed;
         }
     }
+
     // Kelas Opponent2 yang mewarisi kelas Opponent dan Melakukan Polymorphism terhadap kelas Opponent
     public class Opponent2 extends Opponent {
 
         private int speed;
-        
+
         //Mengganti gambar 
         Opponent2(double x, double y) {
             super(x, y, new Image(SpaceExplorerGameController.class.getResource(
@@ -358,35 +374,58 @@ public class SpaceExplorerGameController implements Initializable {
             this.speed += increaseSpeed;
         }
     }
-    
+
+    // Kelas Opponent3 yang mewarisi kelas Opponent dan Melakukan Polymorphism terhadap kelas Opponent
+    public class Opponent3 extends Opponent {
+
+        private int speed;
+
+        //Mengganti gambar 
+        Opponent3(double x, double y) {
+            super(x, y, new Image(SpaceExplorerGameController.class.getResource(
+                    "/projectakhir/image/images/3.png").toExternalForm()));
+            this.speed = 30;
+        }
+
+        @Override
+        public void moveDown() {
+            move(0, speed);
+        }
+
+        @Override
+        public void increaseSpeed(double increaseSpeed) {
+            this.speed += increaseSpeed;
+        }
+    }
+
     // Handler tombol
     @FXML
     private void onKeyPressed(KeyEvent event) {
-         if (gameStarted) {
-    } else {
-             // Cek apakah tombol yang ditekan adalah tombol mulai
-             switch (event.getCode()) {
-                 case W:
-                 case A:
-                 case S:
-                 case D:
-                 case UP:
-                 case DOWN:
-                 case LEFT:
-                 case RIGHT:
-                     startGameLabel.setVisible(false);
-                     gameStarted = true;
-                     gameLoop.play();
-                     break;
-                 default: 
-                     return;
-             }
+        if (gameStarted) {
+        } else {
+            // Cek apakah tombol yang ditekan adalah tombol mulai
+            switch (event.getCode()) {
+                case W:
+                case A:
+                case S:
+                case D:
+                case UP:
+                case DOWN:
+                case LEFT:
+                case RIGHT:
+                    startGameLabel.setVisible(false);
+                    gameStarted = true;
+                    gameLoop.play();
+                    break;
+                default:
+                    return;
+            }
         }
         if (gameOver) {
             return;
         }
 
-        double moveAmount = 30; 
+        double moveAmount = 30;
         double newX = rocketPlayer.getLayoutX();
         double newY = rocketPlayer.getLayoutY();
 
@@ -414,11 +453,11 @@ public class SpaceExplorerGameController implements Initializable {
                 break;
 
         }
-        player.setPosition(newX, newY); 
+        player.setPosition(newX, newY);
         System.out.println("Key Pressed: " + event.getCode());
         newX = Math.max(0, Math.min(WIDTH - player.getView().getFitWidth(), newX));
         newY = Math.max(0, Math.min(HEIGHT - player.getView().getFitHeight(), newY));
-        player.setPosition(newX, newY); 
+        player.setPosition(newX, newY);
 
     }
 
@@ -450,7 +489,7 @@ public class SpaceExplorerGameController implements Initializable {
             currentStage.setScene(new Scene(mainMenuRoot));
             currentStage.setTitle("Main Menu");
         } catch (IOException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
     }
 }
