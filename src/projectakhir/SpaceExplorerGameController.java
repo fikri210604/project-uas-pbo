@@ -200,7 +200,7 @@ public class SpaceExplorerGameController implements Initializable {
         }
     }
 
-    // Kelas Character sebagai kelas awal
+    // Kelas Character sebagai kelas awal yang mengencapsulasi datanya
     public abstract class Character {
 
         protected double x, y;
