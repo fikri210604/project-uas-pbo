@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectakhir.LogInControllerController">
+   <children>
+      <ImageView fitHeight="512.0" fitWidth="910.0" layoutY="-7.0" onMouseClicked="#homeBack" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/MenuBackground.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="218.0" fitWidth="365.0" layoutX="273.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/Title.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="usernameField" layoutX="393.0" layoutY="222.0" />
+      <TextField fx:id="passwordField" layoutX="393.0" layoutY="289.0" />
+      <Button fx:id="logIn" layoutX="416.0" layoutY="373.0" mnemonicParsing="false" onAction="#loginClick" prefHeight="32.0" prefWidth="102.0" text="Masuk" />
+      <Label layoutX="312.0" layoutY="226.0" text="Username" textFill="WHITE" />
+      <Label layoutX="313.0" layoutY="293.0" text="Password" textFill="WHITE" />
+      <Circle fill="#2d5d89" layoutX="855.0" layoutY="58.0" onMouseClicked="#homeBack" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+   </children>
+</AnchorPane>

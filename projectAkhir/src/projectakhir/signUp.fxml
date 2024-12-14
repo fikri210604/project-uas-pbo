@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectakhir.SignUpController">
+   <children>
+      <ImageView fitHeight="512.0" fitWidth="910.0" layoutY="1.0" onMouseClicked="#homeBack" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/MenuBackground.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="218.0" fitWidth="365.0" layoutX="283.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/Title.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="usernameField" layoutX="403.0" layoutY="232.0" />
+      <TextField fx:id="passwordField" layoutX="403.0" layoutY="299.0" />
+      <Button layoutX="426.0" layoutY="383.0" mnemonicParsing="false" onAction="#signUpClick" prefHeight="32.0" prefWidth="102.0" text="Sign Up" />
+      <Label layoutX="322.0" layoutY="236.0" text="Username" textFill="WHITE" />
+      <Label layoutX="323.0" layoutY="303.0" text="Password" textFill="WHITE" />
+      <Circle fill="#2d5d89" layoutX="865.0" layoutY="68.0" onMouseClicked="#homeBack" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+   </children>
+</AnchorPane>
