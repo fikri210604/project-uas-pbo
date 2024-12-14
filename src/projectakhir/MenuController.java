@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package projectakhir;
-
+//LIBRARY
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,8 +25,8 @@ import javafx.stage.Stage;
  *
  * @author Administrator
  */
-public class MenuController implements Initializable {
-
+public class MenuController implements Initializable { //DEKLARASI KELAS
+//DEKLARASI VARIABEL
     @FXML
     private ImageView pane;
     @FXML
