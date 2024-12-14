@@ -33,8 +33,7 @@ public class SignUpController implements Initializable {
     private TextField usernameField;
     @FXML
     private TextField passwordField;
-    @FXML
-    private Button signUp;  // Menambahkan deklarasi tombol signUp
+    private Button signUp;  
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -54,37 +53,27 @@ public class SignUpController implements Initializable {
     private void signUpClick(ActionEvent event) {
         String username = usernameField.getText().trim();
         String password = passwordField.getText().trim();
-
-        // Validasi input
         if (username.isEmpty() || password.isEmpty()) {
             showAlert("Error", "Please fill in both username and password.", Alert.AlertType.ERROR);
             return;
         }
-
-        // Cek registrasi
         if (!registerUser(username, password)) {
             showAlert("Error", "Username already exists or database error occurred.", Alert.AlertType.ERROR);
         } else {
             showAlert("Success", "Sign up successful! Redirecting to the menu...", Alert.AlertType.INFORMATION);
-            // Pindah ke menu
             redirectToMenu();
         }
     }
-
     private boolean registerUser(String username, String password) {
         try (Connection conn = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
              PreparedStatement checkStmt = conn.prepareStatement(SELECT_USER_QUERY);
              PreparedStatement insertStmt = conn.prepareStatement(INSERT_USER_QUERY)) {
-
-            // Cek apakah username sudah ada
             checkStmt.setString(1, username);
             ResultSet resultSet = checkStmt.executeQuery();
 
             if (resultSet.next()) {
-                return false; // Username sudah ada
+                return false; 
             }
-
-            // Masukkan user baru
             insertStmt.setString(1, username);
             insertStmt.setString(2, password);
             insertStmt.executeUpdate();
@@ -99,10 +88,8 @@ public class SignUpController implements Initializable {
 
     private void redirectToMenu() {
         try {
-            // Muat file menu FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
             Parent menuRoot = loader.load();
-            // Dapatkan stage saat ini dan atur scene baru
             Stage currentStage = (Stage) signUp.getScene().getWindow();
             currentStage.setScene(new Scene(menuRoot));
             currentStage.setTitle("Main Menu");
